@@ -1,0 +1,106 @@
+/* Tailwind v4 entry point. Source detection is limited to app files
+   so docs/ and dist/ are never scanned. */
+@import "tailwindcss" source(none);
+
+@source "./*.{ts,tsx}";
+@source "./components";
+@source "./hooks";
+
+/* Class-based dark mode (was `darkMode: 'class'`). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Roboto", sans-serif;
+
+  /* Material 3 baseline palette. Keys keep the camelCase names the
+     components use, e.g. bg-md-sys-light-surfaceVariant/50. */
+  --color-md-sys-light-primary: #6750a4;
+  --color-md-sys-light-onPrimary: #ffffff;
+  --color-md-sys-light-primaryContainer: #eaddff;
+  --color-md-sys-light-onPrimaryContainer: #21005d;
+  --color-md-sys-light-secondary: #625b71;
+  --color-md-sys-light-secondaryContainer: #e8def8;
+  --color-md-sys-light-onSecondaryContainer: #1d192b;
+  --color-md-sys-light-background: #fffbfe;
+  --color-md-sys-light-onBackground: #1c1b1f;
+  --color-md-sys-light-surface: #f7f2fa; /* Surface 1 */
+  --color-md-sys-light-surfaceVariant: #e7e0ec;
+  --color-md-sys-light-onSurface: #1c1b1f;
+  --color-md-sys-light-onSurfaceVariant: #49454f;
+  --color-md-sys-light-outline: #79747e;
+
+  --color-md-sys-dark-primary: #d0bcff;
+  --color-md-sys-dark-onPrimary: #381e72;
+  --color-md-sys-dark-primaryContainer: #4f378b;
+  --color-md-sys-dark-onPrimaryContainer: #eaddff;
+  --color-md-sys-dark-secondary: #ccc2dc;
+  --color-md-sys-dark-secondaryContainer: #4a4458;
+  --color-md-sys-dark-onSecondaryContainer: #e8def8;
+  --color-md-sys-dark-background: #1c1b1f;
+  --color-md-sys-dark-onBackground: #e6e1e5;
+  --color-md-sys-dark-surface: #2b2930; /* Surface 1 */
+  --color-md-sys-dark-surfaceVariant: #49454f;
+  --color-md-sys-dark-onSurface: #e6e1e5;
+  --color-md-sys-dark-onSurfaceVariant: #cac4d0;
+  --color-md-sys-dark-outline: #938f99;
+
+  --animate-fade-scale: fadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@layer base {
+  /* Tailwind v3 defaults that v4 changed. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar for a Material feel. */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 4px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+}
